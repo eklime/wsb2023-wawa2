@@ -1,4 +1,4 @@
-@description('Podaj nazwę konta storage')
+@description('Podaj nazwę konta storage ')
 @minLength(3)
 @maxLength(23)
 param stgName string
