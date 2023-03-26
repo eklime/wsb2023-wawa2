@@ -1,5 +1,5 @@
 targetScope = 'subscription'
-param envSuffix string = '-prod'
+param envSuffix string
 param location string
 param kv_access_objectID string = '16abf7a2-80f4-445e-85d0-6ba73d0b3e5c'
 param deploy_kv bool = true

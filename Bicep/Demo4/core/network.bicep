@@ -1,9 +1,10 @@
 param location string = resourceGroup().location
 param vnetaddressspace string = '10'
 param envSuffix string
-param privateDnsZones_private_cloudBrew_name string = 'private.cloudBrew'
 param projectName string
 var sharedRules = json(loadTextContent('../shared/nsg_config.json')).securityRules
+
+var privateDnsZones_private_name  = 'private.${projectName}'
 
 var client_subnets = [
   {
@@ -344,8 +345,8 @@ resource private_dns_sql_zone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   location: 'global'
 }
 
-resource privateDnsZones_private_cloudBrew_name_resource 'Microsoft.Network/privateDnsZones@2018-09-01' = {
-  name: privateDnsZones_private_cloudBrew_name
+resource privateDnsZones_private_name_resource 'Microsoft.Network/privateDnsZones@2018-09-01' = {
+  name: privateDnsZones_private_name
   location: 'global'
 }
 
@@ -371,8 +372,8 @@ resource virtualNetworkSQLLink 'Microsoft.Network/privateDnsZones/virtualNetwork
   }
 }
 
-resource privateDnsZones_private_cloudBrew_name_vnet_prod 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
-  name: '${privateDnsZones_private_cloudBrew_name_resource.name}/vnet-${projectName}${envSuffix}'
+resource privateDnsZones_private_name_vnet_prod 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
+  name: '${privateDnsZones_private_name_resource.name}/vnet-${projectName}${envSuffix}'
   location: 'global'
   properties: {
     registrationEnabled: true
@@ -382,8 +383,8 @@ resource privateDnsZones_private_cloudBrew_name_vnet_prod 'Microsoft.Network/pri
   }
 }
 
-resource privateDnsZones_private_cloudBrew_name_vnet_hub_prod 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
-  name: '${privateDnsZones_private_cloudBrew_name_resource.name}/vnet-hub${envSuffix}'
+resource privateDnsZones_private_name_vnet_hub_prod 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
+  name: '${privateDnsZones_private_name_resource.name}/vnet-hub${envSuffix}'
   location: 'global'
   properties: {
     registrationEnabled: true
@@ -397,5 +398,5 @@ output client_vnet_id string = client_vnet.id
 output hub_vnet_id string = hub_vnet.id
 output private_dns_zone_name_id string = private_dns_file_zone.id
 output private_dns_sql_zone_name_id string = private_dns_sql_zone.id
-output private_dns_cloudBrew_name_id string = privateDnsZones_private_cloudBrew_name_resource.id
+output private_dns_name_id string = privateDnsZones_private_name_resource.id
 output clien_vnet_address_space string = client_vnet.properties.addressSpace.addressPrefixes[0]
