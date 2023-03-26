@@ -1,1 +1,1 @@
-# wsb2023-wawa2
+# Wyższa Szkoła Bankowa w Warszawie
