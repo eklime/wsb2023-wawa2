@@ -1,1 +1,1 @@
-# Wyższa Szkoła Bankowa w Warszawie
+# Wyższa Szkoła Bankowa w Warszawie - rocznik 2023
