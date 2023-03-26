@@ -1,7 +1,7 @@
 targetScope = 'subscription'
-param envSuffix string = '-prod'
-param location string = 'westeurope'
-param projectName string = 'CloudBrew'
+param envSuffix string
+param location string
+param projectName string
 
 param core_deployment bool = true
 param infra_deployment bool = true

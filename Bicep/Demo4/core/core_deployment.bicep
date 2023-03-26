@@ -2,7 +2,7 @@
 
 targetScope = 'subscription'
 param envSuffix string
-param location string = 'westeurope'
+param location string
 param projectName string
 
 var resourceGroups = [
